@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 20:37:22 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/07 23:00:20 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/11 21:43:55 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include "external_incs.h"
+# include "definitions.h"
 
 typedef struct s_list
 {
@@ -64,6 +65,9 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+
+/* Read to a File Descriptor ------------------------------------------------ */
+char	*ft_get_next_line(int fd);
 
 /* bonus ------------------------------------------------------------------- */
 t_list	*ft_lstnew(void *content);
