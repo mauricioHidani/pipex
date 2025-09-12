@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 21:10:02 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/12 10:31:43 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/12 10:45:42 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_excprc(char *cmd, char **envp, int *prev_in_fd)
 		close(fd[1]);
 		waitpid(pid, NULL, 0);
 		*prev_in_fd = fd[0];
-		ft_sanatize_cmd(cmdx);
+		ft_sanatize_mtx(cmdx);
 	}
 }
 
@@ -47,7 +47,7 @@ static void	ft_child_prc(char **cmd, char **envp, int *fd, int *prev_in_fd)
 	close(*prev_in_fd);
 	close(fd[1]);
 	execve(cmd[0], cmd, envp);
-	ft_sanatize_cmd(cmd);
+	ft_sanatize_mtx(cmd);
 	perror("exceve");
 	exit(ERROR);
 }

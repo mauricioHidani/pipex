@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 21:14:05 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/11 21:50:27 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/12 10:46:22 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_excout(int argc, char **argv, char **envp, int *prev_in_fd)
 {
-	int	fd_open;
+	int		fd_open;
 	char	**cmd;
 	pid_t	pid;
 
@@ -37,6 +37,6 @@ void	ft_excout(int argc, char **argv, char **envp, int *prev_in_fd)
 		close(*prev_in_fd);
 		close(fd_open);
 		waitpid(pid, NULL, 0);
-		ft_sanatize_cmd(cmd);
+		ft_sanatize_mtx(cmd);
 	}
 }

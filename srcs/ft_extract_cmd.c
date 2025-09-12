@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 09:26:58 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/12 10:17:51 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/12 11:01:40 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,13 @@ char	**ft_extract_cmd(char *s, char **env)
 		exit(1);
 	nenv = ft_get_env(env);
 	ncmd = ft_get_cmd(s, nenv);
-	ft_sanatize_cmd(nenv);
+	if (!ncmd)
+	{
+		ft_sanatize_mtx(nenv);
+		perror("ft_extract_cmd");
+		exit(ERROR);
+	}
+	ft_sanatize_mtx(nenv);
 	return (ncmd);
 }
 
@@ -40,7 +46,10 @@ static char	**ft_get_env(char **env)
 	while (env[i] && ft_strncmp(env[i], "PATH", 4) != 0)
 		i++;
 	if (!env[i])
+	{
 		perror("ft_get_env");
+		exit(ERROR);
+	}
 	tmp = ft_substr(env[i], 5, ft_strlen(env[i]));
 	nenv = ft_split(tmp, ':');
 	free(tmp);
@@ -79,7 +88,7 @@ static char	**ft_get_cmd(char *cmd, char **env)
 
 	ncmd = ft_split(cmd, ' ');
 	ft_clean_str(ncmd);
-	aux = ft_substr(ncmd[0], 0, ft_strlen(ncmd[0]));
+	aux = ft_strdup(ncmd[0]);
 	i = 0;
 	while (env[i])
 	{
@@ -91,6 +100,7 @@ static char	**ft_get_cmd(char *cmd, char **env)
 		i++;
 	}
 	free(aux);
-	ft_sanatize_cmd(ncmd);
+	ft_sanatize_mtx(ncmd);
+	perror("ft_get_cmd");
 	return (NULL);
 }

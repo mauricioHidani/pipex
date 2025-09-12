@@ -6,13 +6,13 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 18:07:46 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/11 19:35:34 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/12 10:40:42 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_sanatize_cmd(char **cmd)
+void	ft_sanatize_mtx(char **cmd)
 {
 	int	i;
 

@@ -6,16 +6,16 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 08:53:06 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/11 21:42:49 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/12 11:22:40 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 static size_t	ft_end(char *s);
-static char	*ft_accumulator(int fd, char *stash);
-static char	*ft_extract_line(char *stash);
-static char	*ft_safe_clean(char *stash);
+static char		*ft_accumulator(int fd, char *stash);
+static char		*ft_extract_line(char *stash);
+static char		*ft_safe_clean(char *stash);
 
 char	*ft_get_next_line(int fd)
 {
@@ -35,6 +35,11 @@ char	*ft_get_next_line(int fd)
 		return (NULL);
 	line = ft_extract_line(stash);
 	stash = ft_safe_clean(stash);
+	if (!stash || !*stash)
+	{
+		free(stash);
+		stash = NULL;
+	}
 	return (line);
 }
 

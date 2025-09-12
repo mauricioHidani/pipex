@@ -6,7 +6,7 @@
 #    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/09 10:15:11 by mhidani           #+#    #+#              #
-#    Updated: 2025/09/11 23:16:32 by mhidani          ###   ########.fr        #
+#    Updated: 2025/09/12 10:44:31 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ LIBFT_OBJS_DIR	= $(OBJS_DIR)libft/
 
 SRCS		= $(SRCS_DIR)ft_excprc.c $(SRCS_DIR)ft_excin.c \
 		$(SRCS_DIR)ft_excout.c $(SRCS_DIR)ft_open_outfile.c \
-		$(SRCS_DIR)ft_extract_cmd.c $(SRCS_DIR)ft_sanatize_cmd.c
+		$(SRCS_DIR)ft_extract_cmd.c $(SRCS_DIR)ft_sanatize_mtx.c
 OBJS		= $(patsubst $(SRCS_DIR)%.c, $(PIPEX_OBJS_DIR)%.o, $(SRCS))
 
 SRCS_BNS	= $(BNS_SRCS_DIR)ft_excin_bonus.c
