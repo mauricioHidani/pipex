@@ -6,30 +6,13 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:01:34 by mhidani           #+#    #+#             */
-/*   Updated: 2025/07/27 18:16:08 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/11 22:06:50 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	t_list	*next(t_list *lt, t_list **ax, t_list **n, void (*del)(void *))
-{
-	if (lt)
-	{
-		(*ax)->next = malloc(sizeof(t_list));
-		if (!(*ax)->next)
-		{
-			ft_lstclear(n, del);
-			return (NULL);
-		}
-		return ((*ax)->next);
-	}
-	else
-	{
-		(*ax)->next = NULL;
-		return (*ax);
-	}
-}
+static	t_list	*next(t_list *lt, t_list **ax, t_list **n, void (*del)(void *));
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
@@ -53,4 +36,23 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 			return (NULL);
 	}
 	return (new);
+}
+
+static	t_list	*next(t_list *lt, t_list **ax, t_list **n, void (*del)(void *))
+{
+	if (lt)
+	{
+		(*ax)->next = malloc(sizeof(t_list));
+		if (!(*ax)->next)
+		{
+			ft_lstclear(n, del);
+			return (NULL);
+		}
+		return ((*ax)->next);
+	}
+	else
+	{
+		(*ax)->next = NULL;
+		return (*ax);
+	}
 }
