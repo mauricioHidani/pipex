@@ -6,11 +6,12 @@
 #    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/09 10:15:11 by mhidani           #+#    #+#              #
-#    Updated: 2025/09/12 10:44:31 by mhidani          ###   ########.fr        #
+#    Updated: 2025/09/12 12:22:53 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= pipex
+BNS_NAME	= pipex_bonus
 VERSION		= 1.2.0v
 JOIN		= 42School
 LOCAL		= São Paulo, Brazil
@@ -24,8 +25,8 @@ VFLGAS		= --leak-check=full --track-origins=yes
 
 INCS_DIR	= includes/
 SRCS_DIR	= srcs/
-LIBS_DIR	= libs/
 OBJS_DIR	= objs/
+LIBS_DIR	= libs/
 BNS_INCS_DIR	= includes_bonus/
 BNS_SRCS_DIR	= bonus/
 LIBFT_INCS_DIR	= libft/
@@ -85,6 +86,77 @@ RESET		:= \033[0m
 
 all: banner $(NAME)
 
+# Generate the executable mandatory pipex
+$(NAME): $(OBJS) | $(LIBFT_SLIB)
+	@echo "\n💪 Compile mandatory pipex."
+	$(CC) $(CFLAGS) -I$(LIBFT_INCS_DIR) -I$(INCS_DIR) \
+	$^ $@.c $(LIBFT_SLIB) -o $@
+
+# Generate the executable bonus pipex
+bonus: banner target_bonus
+
+target_bonus: $(OBJS) $(BNS_OBJS) | $(LIBFT_SLIB)
+	@echo "\n💪 Compile bonus pipex."
+	$(CC) $(CFLAGS) -I$(LIBFT_INCS_DIR) -I$(INCS_DIR) -I$(BNS_INCS_DIR) \
+	$^ $(BNS_NAME).c $(LIBFT_SLIB) -o $(BNS_NAME)
+
+# Generates the static lib of libft
+$(LIBFT_SLIB): $(LIBFT_OBJS) | $(LIBS_DIR)
+	@echo "\n📦 Link the objects of libft."
+	$(AR) $(ARFLAGS) $@ $^
+
+# Generates the project's standard objects
+$(PIPEX_OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(PIPEX_OBJS_DIR)
+	$(CC) $(CFLAGS) -I$(INCS_DIR) -I$(LIBFT_INCS_DIR) -c $< -o $@
+
+# Generates the bonus project's standard objects
+$(BNS_OBJS_DIR)%.o: $(BNS_SRCS_DIR)%.c | $(BNS_OBJS_DIR)
+	$(CC) $(CFLAGS) -I$(INCS_DIR) -I$(BNS_INCS_DIR) -I$(LIBFT_INCS_DIR) \
+	-c $< -o $@
+
+# Generates the libft's objects
+$(LIBFT_OBJS_DIR)%.o: $(LIBFT_SRCS_DIR)%.c | $(LIBFT_OBJS_DIR)
+	$(CC) $(CFLAGS) -I$(INCS_DIR) -I$(LIBFT_INCS_DIR) -c $< -o $@
+
+# Creates directories if they don't exist
+$(LIBS_DIR):
+	mkdir -p $@
+
+$(PIPEX_OBJS_DIR):
+	@echo "\n🦎 Creating the pipex objects."
+	mkdir -p $@
+
+$(BNS_OBJS_DIR):
+	@echo "\n🦎 Creating the bonus pipex objects."
+	mkdir -p $@
+
+$(LIBFT_OBJS_DIR):
+	@echo "\n🦎 Creating the libft objects."
+	mkdir -p $@
+
+valgrind: $(NAME)
+	@echo "\n🐉 Running Valgrind on Mandatory Pipex."
+	$(VG) $(VFLGAS) ./$(NAME) $(ARGS)
+
+valgrind_bonus: bonus
+	@echo "\n🐉 Running Valgrind on Bonus Pipex."
+	$(VG) $(VFLGAS) ./$(NAME)_bonus $(ARGS)
+
+clean: banner
+	@echo "\n🗑️ Clean"
+	rm -rf $(LIBFT_OBJS_DIR)
+	rm -rf $(PIPEX_OBJS_DIR)
+	rm -rf $(BNS_OBJS_DIR)
+	rm -rf $(OBJS_DIR)
+	rm -rf $(LIBS_DIR)
+
+fclean: clean
+	@echo "\n🗑️ Full Clean"
+	rm -f $(NAME)
+	rm -f $(NAME)_bonus
+
+re: fclean all
+
 banner:
 	@echo "$(C1)  ______   __     ______   ______     __  __    $(RESET)"
 	@echo "$(C2) /\  == \ /\ \   /\  == \ /\  ___\   /\_\_\_\   $(RESET)"
@@ -119,73 +191,5 @@ help:
 	@echo "Clears all the files generated for the compilation of the Pipex "
 	@echo "project, such as objects and libraries. As well as the "
 	@echo "executable."
-
-# Generate the executable mandatory pipex
-$(NAME): $(OBJS) | $(LIBFT_SLIB)
-	@echo "\n📦 Compile mandatory pipex."
-	$(CC) -g $(CFLAGS) -I$(LIBFT_INCS_DIR) -I$(INCS_DIR) $^ $@.c $(LIBFT_SLIB) -o $@
-
-# Generate the executable bonus pipex
-bonus: banner target_bonus
-
-target_bonus: $(OBJS) $(BNS_OBJS) | $(LIBFT_SLIB) 
-	@echo "\n💪 Compile bonus pipex."
-	$(CC) $(CFLAGS) -I$(LIBFT_INCS_DIR) -I$(INCS_DIR) -I$(BNS_INCS_DIR) $^ $(NAME)_bonus.c $(LIBFT_SLIB) -o $(NAME)_bonus
-
-# Generate a static lib of libft
-$(LIBFT_SLIB): $(LIBFT_OBJS) | $(LIBS_DIR)
-	$(AR) $(ARFLAGS) $@ $^
-
-# Generates the project's standard objects
-$(PIPEX_OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(PIPEX_OBJS_DIR)
-	$(CC) $(CFLAGS) -I$(INCS_DIR) -I$(LIBFT_INCS_DIR) -c $< -o $@
-
-# Generates the bonus project's standard objects
-$(BNS_OBJS_DIR)%.o: $(BNS_SRCS_DIR)%.c | $(BNS_OBJS_DIR)
-	$(CC) $(CFLAGS) -I$(INCS_DIR) -I$(BNS_INCS_DIR) -I$(LIBFT_INCS_DIR) -c $< -o $@
-
-# Generates the libft's objects
-$(LIBFT_OBJS_DIR)%.o: $(LIBFT_SRCS_DIR)%.c | $(LIBFT_OBJS_DIR)
-	$(CC) $(CFLAGS) -I$(INCS_DIR) -I$(LIBFT_INCS_DIR) -c $< -o $@
-
-# Creates directories if they don't exist
-$(LIBS_DIR):
-	@echo "\n🦎 Creating a static libraries."
-	mkdir -p $@
-
-$(PIPEX_OBJS_DIR):
-	@echo "\n🦎 Creating the pipex objects."
-	mkdir -p $@
-
-$(BNS_OBJS_DIR):
-	@echo "\n🦎 Creating the bonus pipex objects."
-	mkdir -p $@
-
-$(LIBFT_OBJS_DIR):
-	@echo "\n🦎 Creating the libft objects."
-	mkdir -p $@
-
-valgrind: $(NAME)
-	@echo "\n🐉 Running Valgrind on Mandatory Pipex."
-	$(VG) $(VFLGAS) ./$(NAME) $(ARGS)
-
-valgrind_bonus: bonus
-	@echo "\n🐉 Running Valgrind on Bonus Pipex."
-	$(VG) $(VFLGAS) ./$(NAME)_bonus $(ARGS)
-
-clean:
-	@echo "\n🗑️ Clean"
-	rm -rf $(LIBFT_OBJS_DIR)
-	rm -rf $(PIPEX_OBJS_DIR)
-	rm -rf $(BNS_OBJS_DIR)
-	rm -rf $(OBJS_DIR)
-	rm -rf $(LIBS_DIR)
-
-fclean: clean
-	@echo "\n🗑️ Full Clean"
-	rm -f $(NAME)
-	rm -f $(NAME)_bonus
-
-re: fclean all
 
 .PHONY: all banner bonus valgrind valgrind_bonus clean fclean re help
