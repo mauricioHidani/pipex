@@ -6,7 +6,7 @@
 #    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/09 10:15:11 by mhidani           #+#    #+#              #
-#    Updated: 2025/09/12 12:22:53 by mhidani          ###   ########.fr        #
+#    Updated: 2025/09/12 17:33:10 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,12 +93,13 @@ $(NAME): $(OBJS) | $(LIBFT_SLIB)
 	$^ $@.c $(LIBFT_SLIB) -o $@
 
 # Generate the executable bonus pipex
-bonus: banner target_bonus
+bonus: banner .bonus
 
-target_bonus: $(OBJS) $(BNS_OBJS) | $(LIBFT_SLIB)
+.bonus: $(OBJS) $(BNS_OBJS) | $(LIBFT_SLIB)
 	@echo "\n💪 Compile bonus pipex."
 	$(CC) $(CFLAGS) -I$(LIBFT_INCS_DIR) -I$(INCS_DIR) -I$(BNS_INCS_DIR) \
 	$^ $(BNS_NAME).c $(LIBFT_SLIB) -o $(BNS_NAME)
+	@touch .bonus
 
 # Generates the static lib of libft
 $(LIBFT_SLIB): $(LIBFT_OBJS) | $(LIBS_DIR)
@@ -144,6 +145,7 @@ valgrind_bonus: bonus
 
 clean: banner
 	@echo "\n🗑️ Clean"
+	rm -f .bonus
 	rm -rf $(LIBFT_OBJS_DIR)
 	rm -rf $(PIPEX_OBJS_DIR)
 	rm -rf $(BNS_OBJS_DIR)
