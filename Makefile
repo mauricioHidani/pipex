@@ -5,111 +5,187 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/09/07 14:25:19 by mhidani           #+#    #+#              #
-#    Updated: 2025/09/07 22:40:40 by mhidani          ###   ########.fr        #
+#    Created: 2025/09/09 10:15:11 by mhidani           #+#    #+#              #
+#    Updated: 2025/09/11 23:16:32 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= pipex
-LIBFT_NAME	= libft
-VERSION		= 1.0.0v
-
-DIR		= pipex/
-SRCS_DIR	= $(DIR)srcs/
-INCS_DIR	= $(DIR)includes/
-LIBS_DIR	= $(DIR)libs/
-OBJS_DIR	= $(DIR)objs/
-
-MAIN		= main.c
-SRCS		= $(SRCS_DIR)ft_pipex.c \
-		$(MAIN)
-OBJS		= $(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS))
-
-LIBFT_SLIB	= $(LIBS_DIR)$(LIBFT_NAME).a
-LIBFT_DIR	= libft/
-LIBFT_SRCS	= $(LIBFT_DIR)ft_isalpha.c $(LIBFT_DIR)ft_isdigit.c \
-		$(LIBFT_DIR)ft_isalnum.c $(LIBFT_DIR)ft_isascii.c \
-		$(LIBFT_DIR)ft_isprint.c $(LIBFT_DIR)ft_toupper.c \
-		$(LIBFT_DIR)ft_tolower.c $(LIBFT_DIR)ft_strlen.c \
-		$(LIBFT_DIR)ft_strlcpy.c $(LIBFT_DIR)ft_strlcat.c \
-		$(LIBFT_DIR)ft_strchr.c $(LIBFT_DIR)ft_strrchr.c \
-		$(LIBFT_DIR)ft_strcmp.c $(LIBFT_DIR)ft_strncmp.c \
-		$(LIBFT_DIR)ft_strnstr.c $(LIBFT_DIR)ft_strmapi.c \
-		$(LIBFT_DIR)ft_substr.c $(LIBFT_DIR)ft_strjoin.c \
-		$(LIBFT_DIR)ft_strtrim.c $(LIBFT_DIR)ft_split.c \
-		$(LIBFT_DIR)ft_striteri.c $(LIBFT_DIR)ft_calloc.c \
-		$(LIBFT_DIR)ft_memset.c $(LIBFT_DIR)ft_bzero.c \
-		$(LIBFT_DIR)ft_memcpy.c $(LIBFT_DIR)ft_memmove.c \
-		$(LIBFT_DIR)ft_memchr.c $(LIBFT_DIR)ft_memcmp.c \
-		$(LIBFT_DIR)ft_strdup.c $(LIBFT_DIR)ft_atoi.c \
-		$(LIBFT_DIR)ft_itoa.c $(LIBFT_DIR)ft_putchar_fd.c \
-		$(LIBFT_DIR)ft_putstr_fd.c $(LIBFT_DIR)ft_putendl_fd.c \
-		$(LIBFT_DIR)ft_putnbr_fd.c $(LIBFT_DIR)ft_lstnew.c \
-		$(LIBFT_DIR)ft_lstadd_front.c $(LIBFT_DIR)ft_lstsize.c \
-		$(LIBFT_DIR)ft_lstlast.c $(LIBFT_DIR)ft_lstadd_back.c \
-		$(LIBFT_DIR)ft_lstdelone.c $(LIBFT_DIR)ft_lstclear.c \
-		$(LIBFT_DIR)ft_lstiter.c $(LIBFT_DIR)ft_lstmap.c
-LIBFT_OBJS	= $(patsubst $(LIBFT_DIR)%.c, $(OBJS_DIR)%.o, $(LIBFT_SRCS))
+VERSION		= 1.2.0v
+JOIN		= 42School
+LOCAL		= São Paulo, Brazil
 
 CC		= cc
-CFLAGS		= -Wall -Wextra -Werror
-CINCS		= -I
 AR		= ar
+VG		= valgrind
+CFLAGS		= -Wall -Wextra -Werror
 ARFLAGS		= -rcs
+VFLGAS		= --leak-check=full --track-origins=yes
 
-# Cores em degradê (do azul ao roxo) TODO: to english
-c1		= \033[38;5;17m	# Azul escuro 
-c2		= \033[38;5;18m	# Azul-marinho
-c3		= \033[38;5;20m	# Azul médio
-c4		= \033[38;5;21m	# Azul claro
-c5		= \033[38;5;55m	# Roxo-azulado
-c6		= \033[38;5;56m	# Roxo
-c7		= \033[38;5;57m	# Roxo-claro
-nc		= \033[0m	# Reset
+INCS_DIR	= includes/
+SRCS_DIR	= srcs/
+LIBS_DIR	= libs/
+OBJS_DIR	= objs/
+BNS_INCS_DIR	= includes_bonus/
+BNS_SRCS_DIR	= bonus/
+LIBFT_INCS_DIR	= libft/
+LIBFT_SRCS_DIR	= libft/
+PIPEX_OBJS_DIR	= $(OBJS_DIR)pipex/
+BNS_OBJS_DIR	= $(OBJS_DIR)bonus/
+LIBFT_OBJS_DIR	= $(OBJS_DIR)libft/
+
+SRCS		= $(SRCS_DIR)ft_excprc.c $(SRCS_DIR)ft_excin.c \
+		$(SRCS_DIR)ft_excout.c $(SRCS_DIR)ft_open_outfile.c \
+		$(SRCS_DIR)ft_extract_cmd.c $(SRCS_DIR)ft_sanatize_cmd.c
+OBJS		= $(patsubst $(SRCS_DIR)%.c, $(PIPEX_OBJS_DIR)%.o, $(SRCS))
+
+SRCS_BNS	= $(BNS_SRCS_DIR)ft_excin_bonus.c
+BNS_OBJS	= $(patsubst $(BNS_SRCS_DIR)%.c, $(BNS_OBJS_DIR)%.o, $(SRCS_BNS))
+
+LIBFT_SLIB	= $(LIBS_DIR)libft.a
+LIBFT_SRCS	= $(LIBFT_SRCS_DIR)ft_atoi.c $(LIBFT_SRCS_DIR)ft_bzero.c\
+		$(LIBFT_SRCS_DIR)ft_calloc.c $(LIBFT_SRCS_DIR)ft_isalnum.c\
+		$(LIBFT_SRCS_DIR)ft_isalpha.c $(LIBFT_SRCS_DIR)ft_isascii.c\
+		$(LIBFT_SRCS_DIR)ft_isdigit.c $(LIBFT_SRCS_DIR)ft_isprint.c\
+		$(LIBFT_SRCS_DIR)ft_itoa.c $(LIBFT_SRCS_DIR)ft_get_next_line.c \
+		$(LIBFT_SRCS_DIR)ft_lstadd_back.c\
+		$(LIBFT_SRCS_DIR)ft_lstadd_front.c\
+		$(LIBFT_SRCS_DIR)ft_lstclear.c $(LIBFT_SRCS_DIR)ft_lstdelone.c\
+		$(LIBFT_SRCS_DIR)ft_lstiter.c $(LIBFT_SRCS_DIR)ft_lstlast.c\
+		$(LIBFT_SRCS_DIR)ft_lstmap.c $(LIBFT_SRCS_DIR)ft_lstnew.c\
+		$(LIBFT_SRCS_DIR)ft_lstsize.c $(LIBFT_SRCS_DIR)ft_memchr.c\
+		$(LIBFT_SRCS_DIR)ft_memcmp.c $(LIBFT_SRCS_DIR)ft_memcpy.c\
+		$(LIBFT_SRCS_DIR)ft_memmove.c $(LIBFT_SRCS_DIR)ft_memset.c\
+		$(LIBFT_SRCS_DIR)ft_putchar_fd.c\
+		$(LIBFT_SRCS_DIR)ft_putendl_fd.c\
+		$(LIBFT_SRCS_DIR)ft_putnbr_fd.c\
+		$(LIBFT_SRCS_DIR)ft_putstr_fd.c $(LIBFT_SRCS_DIR)ft_split.c\
+		$(LIBFT_SRCS_DIR)ft_strchr.c $(LIBFT_SRCS_DIR)ft_strcmp.c\
+		$(LIBFT_SRCS_DIR)ft_strdup.c $(LIBFT_SRCS_DIR)ft_striteri.c\
+		$(LIBFT_SRCS_DIR)ft_strjoin.c $(LIBFT_SRCS_DIR)ft_strlcat.c\
+		$(LIBFT_SRCS_DIR)ft_strlcpy.c $(LIBFT_SRCS_DIR)ft_strlen.c\
+		$(LIBFT_SRCS_DIR)ft_strmapi.c $(LIBFT_SRCS_DIR)ft_strncmp.c\
+		$(LIBFT_SRCS_DIR)ft_strnstr.c $(LIBFT_SRCS_DIR)ft_strrchr.c\
+		$(LIBFT_SRCS_DIR)ft_strtrim.c $(LIBFT_SRCS_DIR)ft_substr.c\
+		$(LIBFT_SRCS_DIR)ft_tolower.c $(LIBFT_SRCS_DIR)ft_toupper.c
+LIBFT_OBJS	= $(patsubst $(LIBFT_SRCS_DIR)%.c, $(LIBFT_OBJS_DIR)%.o,\
+		$(LIBFT_SRCS))
+
+C1		:= \033[38;5;17m
+C2		:= \033[38;5;18m
+C3		:= \033[38;5;20m
+C4		:= \033[38;5;21m
+C5		:= \033[38;5;55m
+C6		:= \033[38;5;56m
+C7		:= \033[38;5;57m
+BOLD		:= \033[1m
+ITALIC		:= \033[3m
+BOLD_ITALIC	:= \033[1;3m
+RESET		:= \033[0m
+
+all: banner $(NAME)
 
 banner:
-	@echo "$(c1) ______   __     ______   ______     __  __    $(nc)"
-	@echo "$(c2)/\  == \ /\ \   /\  == \ /\  ___\   /\_\_\_\   $(nc)"
-	@echo "$(c3)\ \  _-/ \ \ \  \ \  _-/ \ \  __\   \/_/\_\/_  $(nc)"
-	@echo "$(c4) \ \_\    \ \_\  \ \_\    \ \_____\   /\_\/\_\ $(nc)"
-	@echo "$(c5)  \/_/     \/_/   \/_/     \/_____/   \/_/\/_/ $(nc)"
-	@echo "$(NAME)-$(VERSION)"
-	@echo "42School - São Paulo, Brazil"
+	@echo "$(C1)  ______   __     ______   ______     __  __    $(RESET)"
+	@echo "$(C2) /\  == \ /\ \   /\  == \ /\  ___\   /\_\_\_\   $(RESET)"
+	@echo "$(C3) \ \  _-/ \ \ \  \ \  _-/ \ \  __\   \/_/\_\/_  $(RESET)"
+	@echo "$(C4)  \ \_\    \ \_\  \ \_\    \ \_____\   /\_\/\_\ $(RESET)"
+	@echo "$(C5)   \/_/     \/_/   \/_/     \/_____/   \/_/\/_/ $(RESET)"
+	@echo "🧩 $(ITALIC)pipex-$(VERSION)$(RESET)"
+	@echo "📍 $(ITALIC)$(JOIN)-$(LOCAL)$(RESET)"
 
-all: $(NAME)
-	banner
+help:
+	@echo "🔍 $(BOLD)Help$(RESET)"
+	@echo
+	@echo "🚩 $(BOLD)make$(RESET)"
+	@echo "It complies all the files needed to generate the Pipex Mandatory"
+	@echo "project. This includes your files as well as Libft files."
+	@echo
+	@echo "🚩 $(BOLD)bonus$(RESET)"
+	@echo "It compiles all the files needed to generate the Pipex Bonus "
+	@echo "project, including its own files and those from Libft."
+	@echo
+	@echo "🚩 $(BOLD)valgrind$(RESET) or $(BOLD)valgrind_bonus$(RESET)"
+	@echo "Used to check for Segment Faults and/or Memory Leaks in the "
+	@echo "Pipex project. To run it, use the following example arguments: "
+	@echo "make valgrind ARGS=\"infile 'grep 42school' 'cat' 'wc -m' "
+	@echo "outfile\""
+	@echo
+	@echo "🚩 $(BOLD)clean(RESET)"
+	@echo "Clears all files generated for the compilation of the Pipex "
+	@echo "project, including objects, static or dynamic libraries."
+	@echo
+	@echo "🚩 $(BOLD)fclean$(RESET)"
+	@echo "Clears all the files generated for the compilation of the Pipex "
+	@echo "project, such as objects and libraries. As well as the "
+	@echo "executable."
 
-$(NAME): $(OBJS) | $(OBJS_DIR)
-	@echo "📥 Creating the pipex..."
-	$(CC) $(CFLAGS) $(CINCS) $(LIBFT_SLIB) $^ -o $@
-	@echo "📤 Pipex generated"
+# Generate the executable mandatory pipex
+$(NAME): $(OBJS) | $(LIBFT_SLIB)
+	@echo "\n📦 Compile mandatory pipex."
+	$(CC) -g $(CFLAGS) -I$(LIBFT_INCS_DIR) -I$(INCS_DIR) $^ $@.c $(LIBFT_SLIB) -o $@
 
-$(LIBFT_NAME): $(LIBFT_OBJS) | $(LIBS_DIR)
-	@echo "🚩 Libft - 1.2.0v [42School]"
-	@echo "📦 Creating the objects and static library of libft..."
-	$(AR) $(ARFLAGS) $(LIBFT_SLIB) $(LIBFT_OBJS)
-	@echo "🤙 Created static library libft"
+# Generate the executable bonus pipex
+bonus: banner target_bonus
 
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(CINCS) $(INCS_DIR) $< -o $@
+target_bonus: $(OBJS) $(BNS_OBJS) | $(LIBFT_SLIB) 
+	@echo "\n💪 Compile bonus pipex."
+	$(CC) $(CFLAGS) -I$(LIBFT_INCS_DIR) -I$(INCS_DIR) -I$(BNS_INCS_DIR) $^ $(NAME)_bonus.c $(LIBFT_SLIB) -o $(NAME)_bonus
 
-$(OBJS_DIR)%.o: $(LIBFT_DIR)%.c | $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(CINCS) $(INCS_DIR) $(CINCS) $(LIBFT_DIR) -c $< -o $@
+# Generate a static lib of libft
+$(LIBFT_SLIB): $(LIBFT_OBJS) | $(LIBS_DIR)
+	$(AR) $(ARFLAGS) $@ $^
 
+# Generates the project's standard objects
+$(PIPEX_OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(PIPEX_OBJS_DIR)
+	$(CC) $(CFLAGS) -I$(INCS_DIR) -I$(LIBFT_INCS_DIR) -c $< -o $@
+
+# Generates the bonus project's standard objects
+$(BNS_OBJS_DIR)%.o: $(BNS_SRCS_DIR)%.c | $(BNS_OBJS_DIR)
+	$(CC) $(CFLAGS) -I$(INCS_DIR) -I$(BNS_INCS_DIR) -I$(LIBFT_INCS_DIR) -c $< -o $@
+
+# Generates the libft's objects
+$(LIBFT_OBJS_DIR)%.o: $(LIBFT_SRCS_DIR)%.c | $(LIBFT_OBJS_DIR)
+	$(CC) $(CFLAGS) -I$(INCS_DIR) -I$(LIBFT_INCS_DIR) -c $< -o $@
+
+# Creates directories if they don't exist
 $(LIBS_DIR):
+	@echo "\n🦎 Creating a static libraries."
 	mkdir -p $@
 
-$(OBJS_DIR):
+$(PIPEX_OBJS_DIR):
+	@echo "\n🦎 Creating the pipex objects."
 	mkdir -p $@
+
+$(BNS_OBJS_DIR):
+	@echo "\n🦎 Creating the bonus pipex objects."
+	mkdir -p $@
+
+$(LIBFT_OBJS_DIR):
+	@echo "\n🦎 Creating the libft objects."
+	mkdir -p $@
+
+valgrind: $(NAME)
+	@echo "\n🐉 Running Valgrind on Mandatory Pipex."
+	$(VG) $(VFLGAS) ./$(NAME) $(ARGS)
+
+valgrind_bonus: bonus
+	@echo "\n🐉 Running Valgrind on Bonus Pipex."
+	$(VG) $(VFLGAS) ./$(NAME)_bonus $(ARGS)
 
 clean:
-	@echo "🗑️ Remove de objects generated"
+	@echo "\n🗑️ Clean"
+	rm -rf $(LIBFT_OBJS_DIR)
+	rm -rf $(PIPEX_OBJS_DIR)
+	rm -rf $(BNS_OBJS_DIR)
 	rm -rf $(OBJS_DIR)
+	rm -rf $(LIBS_DIR)
 
 fclean: clean
-	@echo "🗑️ Remove the pipex"
-	rm -rf $(NAME) $(LIBS_DIR)
+	@echo "\n🗑️ Full Clean"
+	rm -f $(NAME)
+	rm -f $(NAME)_bonus
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all banner bonus valgrind valgrind_bonus clean fclean re help
