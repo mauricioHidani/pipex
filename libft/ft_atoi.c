@@ -6,21 +6,14 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 15:32:50 by mhidani           #+#    #+#             */
-/*   Updated: 2025/07/25 08:51:39 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/11 22:05:53 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	check_isspace(const char c)
-{
-	return (c >= 9 && (c <= 13 || c == 32));
-}
-
-static int	check_isnum(const char c)
-{
-	return (c >= 48 && c <= 57);
-}
+static int	check_isspace(const char c);
+static int	check_isnum(const char c);
 
 int	ft_atoi(const char *nptr)
 {
@@ -43,4 +36,14 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	return (res * sign);
+}
+
+static int	check_isspace(const char c)
+{
+	return (c >= 9 && (c <= 13 || c == 32));
+}
+
+static int	check_isnum(const char c)
+{
+	return (c >= 48 && c <= 57);
 }
