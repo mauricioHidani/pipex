@@ -6,14 +6,13 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 09:26:58 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/10 15:13:49 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/12 10:17:51 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include "libft.h"
 
-static void	ft_sanitize(char **mtx);
 static char	**ft_get_env(char **env);
 static void	ft_clean_str(char **ncmd);
 static char	**ft_get_cmd(char *cmd, char **env);
@@ -27,23 +26,8 @@ char	**ft_extract_cmd(char *s, char **env)
 		exit(1);
 	nenv = ft_get_env(env);
 	ncmd = ft_get_cmd(s, nenv);
-	ft_sanitize(nenv);
+	ft_sanatize_cmd(nenv);
 	return (ncmd);
-}
-
-static void	ft_sanitize(char **mtx)
-{
-	int	i;
-
-	if (!mtx)
-		return ;
-	i = 0;
-	while (mtx[i])
-	{
-		free(mtx[i]);
-		i++;
-	}
-	free(mtx);
 }
 
 static char	**ft_get_env(char **env)
@@ -73,7 +57,7 @@ static char	**ft_get_env(char **env)
 
 static void	ft_clean_str(char **ncmd)
 {
-	int	i;
+	int		i;
 	char	*tmp;
 
 	i = 0;
@@ -107,6 +91,6 @@ static char	**ft_get_cmd(char *cmd, char **env)
 		i++;
 	}
 	free(aux);
-	ft_sanitize(ncmd);
+	ft_sanatize_cmd(ncmd);
 	return (NULL);
 }
