@@ -6,14 +6,14 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 17:27:21 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/11 22:06:27 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/12 17:35:23 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 static size_t	ft_nbr_length(int n);
-static void	ft_nrb_convert_to_str(int n, char *s, size_t i);
+static void		ft_nrb_convert_to_str(int n, char *s, size_t i);
 
 char	*ft_itoa(int n)
 {

@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 21:05:30 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/11 21:28:58 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/12 17:35:43 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	ft_excin_file(char **argv);
 
 void	ft_excin(char **argv, int *prev_in_fd)
 {
-	int	fd[2];
+	int		fd[2];
 	pid_t	pid;
 
 	if (pipe(fd) == -1)
@@ -42,8 +42,8 @@ static void	ft_excin_file(char **argv)
 {
 	char	*line;
 	char	*tmp;
-	int	fd_read;
-	
+	int		fd_read;
+
 	fd_read = open(argv[1], O_RDONLY);
 	if (fd_read < 0)
 		exit(ERROR);

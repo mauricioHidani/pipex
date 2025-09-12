@@ -6,16 +6,16 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 20:36:51 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/11 22:07:54 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/12 17:34:49 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 static size_t	count_tokens(char const *s, char c);
-static char	*start_pivot(char const *s, char c);
-static char	*end_pivot(char const *s, char c);
-static char	*get_token(char *pivot, char *end, char **tokens, size_t size);
+static char		*start_pivot(char const *s, char c);
+static char		*end_pivot(char const *s, char c);
+static char		*get_token(char *pivot, char *end, char **tokens, size_t size);
 
 char	**ft_split(char const *s, char c)
 {
