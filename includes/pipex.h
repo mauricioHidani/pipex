@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 17:57:26 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/24 19:32:17 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/24 19:47:23 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	ft_resolve_cmds(t_dlist *cmds, int **pips, t_shrd *shrd);
 void	ft_execproc(t_cmd *cmd, int **pips, size_t idx, t_shrd *shrd);
 void	ft_last_execproc(t_cmd *cmd, int **pips, t_shrd *shared);
 
-void	ft_handle_heredoc(char *eof, int *fd);
-void	ft_handle_infile(char *filename, int *fd);
-int		ft_handle_outfile(t_shrd *shared);
+void	ft_handler_heredoc(char *eof, int *fd);
+void	ft_handler_infile(char *filename, int *fd);
+int		ft_handler_outfile(t_shrd *shared);
 
 char	**ft_extract_paths(char **envp);
 char	*ft_extract_pcmd(char *cmd, char **paths, int *code_status);
