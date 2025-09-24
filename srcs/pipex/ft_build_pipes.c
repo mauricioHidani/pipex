@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 13:20:05 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/23 18:51:56 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/24 17:44:10 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	**ft_alloc_pipes(size_t size);
 static int	*ft_alloc_pipe_fd(int **pipes);
+static void	ft_close_safe_all_pipes(int **pipes, size_t size);
 
 int	**ft_build_pipes(int argc, char ishdoc)
 {
@@ -35,6 +36,10 @@ int	**ft_build_pipes(int argc, char ishdoc)
 			return (NULL);
 		i++;
 	}
+	i = 0;
+	while (i < size)
+		if (pipe(pipes[i++]) == -1)
+			ft_close_safe_all_pipes(pipes, size);
 	return (pipes);
 }
 
@@ -62,5 +67,21 @@ static int	*ft_alloc_pipe_fd(int **pipes)
 		ft_clean_tab((void **)pipes);
 		return (NULL);
 	}
+	pipe_fd[0] = -1;
+	pipe_fd[1] = -1;
 	return (pipe_fd);
+}
+
+static void	ft_close_safe_all_pipes(int **pipes, size_t size)
+{
+	size_t	i;
+
+	perror("pipe");
+	i = 0;
+	while (i < size)
+	{
+		free(pipes[i]);
+		i++;
+	}
+	free(pipes);
 }
