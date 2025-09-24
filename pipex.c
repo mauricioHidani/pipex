@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 17:56:46 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/24 12:24:08 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/24 19:27:05 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	main(int argc, char **argv, char **envp)
 	char	ishdoc;
 	t_shrd	*shared;
 	int		**pipes;
-	t_dlist	*list;
+	t_dlist	*command_lst;
+	int		exit_status;
 
 	if (argc < 5 || !argv || !envp)
 		return (EXIT_FAILURE);
@@ -26,10 +27,10 @@ int	main(int argc, char **argv, char **envp)
 		ishdoc = 1;
 	shared = ft_build_shrd(argc, argv, envp, ishdoc);
 	pipes = ft_build_pipes(argc, ishdoc);
-	list = ft_build_cmds(shared);
-	ft_exec_cmds(list, pipes, shared);
+	command_lst = ft_build_cmds(shared);
+	ft_resolve_cmds(command_lst, pipes, shared);
 	ft_close_all(pipes, shared);
-	ft_waitpids(list);
-	ft_clean_all(shared, pipes, list);
-	return (EXIT_SUCCESS);
+	ft_waitpids(command_lst, &exit_status);
+	ft_clean_all(shared, pipes, command_lst);
+	return (exit_status);
 }
