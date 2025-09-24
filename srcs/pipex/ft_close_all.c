@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:14:40 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/24 12:24:40 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/24 19:08:17 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	ft_close_all(int **pipes, t_shrd *shrd)
 	size_t	size;
 
 	i = 0;
-	size = shrd->argc - 3;
+	size = shrd->argc - 4;
 	if (shrd->ishdoc)
-		size = shrd->argc - 4;
+		size = shrd->argc - 5;
 	while (i < size)
 	{
 		close(pipes[i][0]);
