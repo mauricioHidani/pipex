@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 16:54:56 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/24 11:52:33 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/24 19:47:16 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_handler_heredoc(char *eof, int *fd)
 		ft_putstr_fd("> ", STDOUT_FILENO);
 		line = ft_get_next_line(STDIN_FILENO);
 	}
+	close(fd[1]);
 }
 
 void	ft_handler_infile(char *filename, int *fd)
@@ -50,4 +51,5 @@ void	ft_handler_infile(char *filename, int *fd)
 		line = NULL;
 		line = ft_get_next_line(infile_fd);
 	}
+	close(fd[1]);
 }
