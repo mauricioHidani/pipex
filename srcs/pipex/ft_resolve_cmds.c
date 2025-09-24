@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exec_cmds.c                                     :+:      :+:    :+:   */
+/*   ft_resolve_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 13:49:45 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/24 12:20:48 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/24 19:04:18 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 static void		ft_safe_exit(char *m, int status, t_dlist *list, int **pipes);
 
-void	ft_exec_cmds(t_dlist *lst, int **pips, t_shrd *shrd)
+void	ft_resolve_cmds(t_dlist *lst, int **pips, t_shrd *shrd)
 {
 	size_t	i;
 	t_cmd	*cmd;
 	t_dnode	*pivot;
-	int		outfile;
 
 	i = 1;
 	pivot = lst->head;
+	if (shrd->ishdoc)
+		ft_handler_heredoc(shrd->argv[2], pips[0]);
+	else
+		ft_handler_infile(shrd->argv[1], pips[0]);
 	while (pivot)
 	{
 		cmd = (t_cmd *)pivot->data;
 		if (cmd->status != 0)
 			ft_safe_exit(cmd->xcmd[0], cmd->status, lst, pips);
-		if (pivot == lst->head)
-			ft_exec_first_cmd(cmd, pips, shrd);
-		else if (pivot == lst->tail)
-			ft_exec_last_cmd(cmd, pips, shrd);
+		if (pivot == lst->tail)
+			ft_last_execproc(cmd, pips, shrd);
 		else
-			ft_exec_middle_cmd(cmd, pips, i, shrd);
+			ft_execproc(cmd, pips, i, shrd);
 		i++;
 		pivot = pivot->next;
 	}
-	close(outfile);
 }
 
 static void	ft_safe_exit(char *m, int status, t_dlist *list, int **pipes)
