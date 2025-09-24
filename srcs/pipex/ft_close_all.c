@@ -1,0 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_close_all.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/24 12:14:40 by mhidani           #+#    #+#             */
+/*   Updated: 2025/09/24 12:24:40 by mhidani          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "pipex.h"
+
+void	ft_close_all(int **pipes, t_shrd *shrd)
+{
+	size_t	i;
+	size_t	size;
+
+	i = 0;
+	size = shrd->argc - 3;
+	if (shrd->ishdoc)
+		size = shrd->argc - 4;
+	while (i < size)
+	{
+		close(pipes[i][0]);
+		i++;
+	}
+	close(shrd->outfile_fd);
+}
