@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 20:58:08 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/21 21:36:03 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/25 11:30:20 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_clean_dlist(t_dlist *list, void (*free_data)(void *))
 	if (!list || !free_data)
 		return ;
 	pivot = list->head;
-	while (pivot->next != NULL)
+	while (pivot != NULL)
 	{
 		tmp = pivot;
 		pivot = pivot->next;

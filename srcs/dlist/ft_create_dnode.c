@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_next_dlist.c                               :+:      :+:    :+:   */
+/*   ft_create_dnode.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/21 19:40:50 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/25 19:22:06 by mhidani          ###   ########.fr       */
+/*   Created: 2025/09/21 19:04:58 by mhidani           #+#    #+#             */
+/*   Updated: 2025/09/25 11:14:56 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dlist.h"
 
-void	ft_push_next_dlist(t_dlist *list, t_dnode *to, void *data)
+t_dnode	*ft_create_dnode(void *data)
 {
 	t_dnode	*node;
 
-	if (!list || !to)
-		return ;
-	if (to == list->tail)
-		ft_push_lst_dlist(list, data);
-	else
-	{
-		node = ft_create_dnode(data);
-		if (!node)
-			return ;
-		node->prev = to;
-		node->next = to->next;
-		to->next->prev = node;
-		to->next = node;
-		list->size++;
-	}
+	if (!data)
+		return (NULL);
+	node = malloc(sizeof(t_dnode));
+	if (!node)
+		return (NULL);
+	node->data = data;
+	node->next = NULL;
+	node->prev = NULL;
+	return (node);
 }
