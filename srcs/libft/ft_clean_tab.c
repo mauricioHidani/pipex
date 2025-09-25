@@ -6,22 +6,23 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:29:23 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/22 11:31:32 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/25 11:03:55 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_clean_tab(void **tab)
+void	ft_clean_tab(void **ptr)
 {
 	size_t	i;
 
+	if (!ptr)
+		return ;
 	i = 0;
-	while (tab[i])
+	while (ptr[i])
 	{
-		free(tab[i]);
+		free(ptr[i]);
 		i++;
 	}
-	free(tab);
-	tab = NULL;
+	free(ptr);
 }

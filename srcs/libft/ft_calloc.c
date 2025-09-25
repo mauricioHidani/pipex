@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 09:30:58 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/22 09:40:09 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/25 19:22:56 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,3 @@ static void	ft_calloc_bzero(void *mem, size_t size)
 		i++;
 	}
 }
-
