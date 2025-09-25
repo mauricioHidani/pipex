@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 20:37:22 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/22 11:50:17 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/25 11:04:08 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	*ft_memmove(void *dst, const void *src, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strdup(const char *src);
-void	ft_clean_tab(void **tab);
+void	ft_clean_tab(void **ptr);
 
 /* Numbers ----------------------------------------------------------------- */
 int		ft_atoi(const char *nptr);
