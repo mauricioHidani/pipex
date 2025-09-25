@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 13:26:26 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/24 19:28:59 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/25 11:58:03 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,17 @@ static t_cmd	*ft_build_cmd(char *in, char **paths)
 	cmd->pid = -1;
 	cmd->status = 0;
 	cmd->xcmd = ft_split_respecting_target(in, ' ', '\'');
+	if (!cmd->xcmd)
+	{
+		free(cmd);
+		return (NULL);
+	}
 	cmd->pcmd = ft_extract_pcmd(cmd->xcmd[0], paths, &cmd->status);
+	if (!cmd->pcmd)
+	{
+		ft_clean_tab((void **)cmd->xcmd);
+		free(cmd);
+		return (NULL);
+	}
 	return (cmd);
 }

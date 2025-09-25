@@ -6,14 +6,14 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 12:44:34 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/23 15:47:06 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/25 11:55:07 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static char	*ft_find_path(char **envp);
-static void	ft_join_brackage(char **paths);
+static char		*ft_find_path(char **envp);
+static void		ft_join_brackage(char **paths);
 
 char	*ft_extract_pcmd(char *cmd, char **paths, int *status)
 {
@@ -86,6 +86,11 @@ static void	ft_join_brackage(char **paths)
 			tmp = paths[i];
 			paths[i] = ft_strjoin(tmp, "/");
 			free(tmp);
+			if (!paths[i])
+			{
+				ft_clean_tab((void **)paths);
+				return ;
+			}
 			tmp = NULL;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 13:20:05 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/24 17:44:10 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/25 11:35:06 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	**ft_build_pipes(int argc, char ishdoc)
 			return (NULL);
 		i++;
 	}
+	pipes[i] = NULL;
 	i = 0;
 	while (i < size)
 		if (pipe(pipes[i++]) == -1)
