@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 17:57:26 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/24 19:47:23 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/08 11:30:53 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,17 @@
 #  define HEREDOC "here_doc"
 # endif
 
+# define TRUE 0x01
+# define FALSE 0x00
+
+typedef char	t_bool;
+
 typedef struct s_shared
 {
 	int		argc;
 	char	**argv;
 	char	**envp;
-	char	ishdoc;
+	t_bool	ishdoc;
 	int		outfile_fd;
 }	t_shrd;
 
@@ -43,8 +48,8 @@ typedef struct s_command
 	int		status;
 }	t_cmd;
 
-t_shrd	*ft_build_shrd(int argc, char **argv, char **envp, char ishdoc);
-int		**ft_build_pipes(int argc, char ishdoc);
+t_shrd	*ft_build_shrd(int argc, char **argv, char **envp, t_bool ishdoc);
+int		**ft_build_pipes(int argc, t_bool ishdoc);
 t_dlist	*ft_build_cmds(t_shrd *shared);
 
 void	ft_resolve_cmds(t_dlist *cmds, int **pips, t_shrd *shrd);
