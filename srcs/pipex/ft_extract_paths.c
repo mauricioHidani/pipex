@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 12:44:34 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/25 11:55:07 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/08 11:23:13 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ char	**ft_extract_paths(char **envp)
 	if (!paths)
 		return (NULL);
 	free(environment_path);
-	environment_path = NULL;
 	ft_join_brackage(paths);
 	return (paths);
 }

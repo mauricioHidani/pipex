@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:16:32 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/24 12:18:19 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/08 11:45:43 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void	ft_clean_all(t_shrd *shrd, int **pips, t_dlist *lst)
 {
-	free(shrd);
-	ft_clean_tab((void **)pips);
-	ft_clean_dlist(lst, ft_clean_cmd);
+	if (shrd)
+		free(shrd);
+	if (pips)
+		ft_clean_tab((void **)pips);
+	if (lst)
+		ft_clean_dlist(lst, ft_clean_cmd);
 }

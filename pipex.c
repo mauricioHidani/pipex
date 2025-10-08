@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 17:56:46 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/24 19:27:05 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/08 15:36:23 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ int	main(int argc, char **argv, char **envp)
 	shared = ft_build_shrd(argc, argv, envp, ishdoc);
 	pipes = ft_build_pipes(argc, ishdoc);
 	command_lst = ft_build_cmds(shared);
+	if (!shared || !pipes || !command_lst)
+	{
+		ft_clean_all(shared, pipes, command_lst);
+		return (EXIT_FAILURE);
+	}
 	ft_resolve_cmds(command_lst, pipes, shared);
 	ft_close_all(pipes, shared);
 	ft_waitpids(command_lst, &exit_status);

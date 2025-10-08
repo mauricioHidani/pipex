@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 16:54:56 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/24 19:47:16 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/08 16:50:15 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_handler_infile(char *filename, int *fd)
 	char	*line;
 
 	infile_fd = open(filename, O_RDONLY);
-	if (!fd < 0)
+	if (!infile_fd)
 		return (perror("open"));
 	line = ft_get_next_line(infile_fd);
 	while (line != NULL)

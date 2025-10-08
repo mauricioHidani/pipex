@@ -6,13 +6,13 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:11:51 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/24 12:14:27 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/08 11:31:56 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-t_shrd	*ft_build_shrd(int argc, char **argv, char **envp, char ishdoc)
+t_shrd	*ft_build_shrd(int argc, char **argv, char **envp, t_bool ishdoc)
 {
 	t_shrd	*shared;
 

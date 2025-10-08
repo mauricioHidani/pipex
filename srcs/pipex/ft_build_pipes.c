@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 13:20:05 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/25 11:35:06 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/08 16:48:27 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	**ft_alloc_pipes(size_t size);
 static int	*ft_alloc_pipe_fd(int **pipes);
 static void	ft_close_safe_all_pipes(int **pipes, size_t size);
 
-int	**ft_build_pipes(int argc, char ishdoc)
+int	**ft_build_pipes(int argc, t_bool ishdoc)
 {
 	size_t	i;
 	size_t	size;
@@ -26,7 +26,7 @@ int	**ft_build_pipes(int argc, char ishdoc)
 	if (ishdoc)
 		size = argc - 4;
 	pipes = ft_alloc_pipes(size);
-	if (!pipe)
+	if (!pipes)
 		return (NULL);
 	i = 0;
 	while (i < size)

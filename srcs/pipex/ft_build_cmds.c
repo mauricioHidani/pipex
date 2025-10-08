@@ -6,15 +6,16 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 13:26:26 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/25 11:58:03 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/08 11:59:27 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
 static t_cmd	*ft_build_cmd(char *in, char **paths);
+static int		ft_begin_idx(t_bool ishdoc);
 
-t_dlist	*ft_build_cmds(t_shrd *shared)
+t_dlist	*ft_build_cmds(t_shrd *shrd)
 {
 	int		i;
 	char	**paths;
@@ -27,13 +28,18 @@ t_dlist	*ft_build_cmds(t_shrd *shared)
 		perror("malloc");
 		return (NULL);
 	}
-	paths = ft_extract_paths(shared->envp);
-	i = 2;
-	if (shared->ishdoc)
-		i = 3;
-	while (i < (shared->argc - 1))
+	paths = ft_extract_paths(shrd->envp);
+	if (!paths)
+		return (free(list), NULL);
+	i = ft_begin_idx(shrd->ishdoc);
+	while (i < (shrd->argc - 1))
 	{
-		cmd = ft_build_cmd(shared->argv[i], paths);
+		cmd = ft_build_cmd(shrd->argv[i], paths);
+		if (!cmd)
+		{
+			ft_clean_dlist(list, ft_clean_cmd);
+			return (NULL);
+		}
 		ft_push_lst_dlist(list, cmd);
 		cmd = NULL;
 		i++;
@@ -65,4 +71,14 @@ static t_cmd	*ft_build_cmd(char *in, char **paths)
 		return (NULL);
 	}
 	return (cmd);
+}
+
+static int	ft_begin_idx(t_bool ishdoc)
+{
+	int	idx;
+
+	idx = 2;
+	if (ishdoc)
+		idx = 3;
+	return (idx);
 }

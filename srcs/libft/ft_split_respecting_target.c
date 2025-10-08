@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 21:34:39 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/25 18:57:54 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/08 16:45:47 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static char		*ft_place_on_begin(char *str, char sep, char tgt, char *find);
 static char		*ft_place_on_last(char *str, char sep, char tgt, char *find);
 static size_t	ft_count_tokens(char *str, char sep, char tgt);
 static void		ft_extract_tokens(char *str, char sep, char tgt, char **split);
-static void		ft_test(void);
 
 char	**ft_split_respecting_target(char *str, char sep, char tgt)
 {
