@@ -1,0 +1,7 @@
+# Directories
+.brainStorage/
+.vscode/
+
+# Files or Directories
+*.o
+
