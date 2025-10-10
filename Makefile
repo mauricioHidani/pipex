@@ -6,7 +6,7 @@
 #    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/08 15:50:49 by mhidani           #+#    #+#              #
-#    Updated: 2025/10/08 17:03:33 by mhidani          ###   ########.fr        #
+#    Updated: 2025/10/10 16:54:55 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,6 +124,15 @@ $(DL_OBJS_DIR):
 
 $(LB_OBJS_DIR):
 	$(MKD) $@
+
+banner:
+	@echo "$(C01) ______   __     ______   ______     __  __ $(RESET)"
+	@echo "$(C02)/\  == \ /\ \   /\  == \ /\  ___\   /\_\_\_\ $(RESET)"
+	@echo "$(C03)\ \  _-/ \ \ \  \ \  _-/ \ \  __\   \/_/\_\/ $(RESET)"
+	@echo "$(C03) \ \_\    \ \_\  \ \_\    \ \_____\   /\_\/\_\ $(RESET)"
+	@echo "$(C04)  \/_/     \/_/   \/_/     \/_____/   \/_/\/_/ $(RESET)"
+	@echo "$(C05)pipex - $(VERSION)$(RESET)"
+	@echo "$(C06)$(LOCAL) - 42 São Paulo$(RESET)"
 
 clean: 
 	@echo ""
