@@ -6,13 +6,13 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:16:32 by mhidani           #+#    #+#             */
-/*   Updated: 2025/10/08 11:45:43 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/10 08:47:42 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_clean_all(t_shrd *shrd, int **pips, t_dlist *lst)
+void	ft_clean_all(t_share *shrd, int **pips, t_dlist *lst)
 {
 	if (shrd)
 		free(shrd);

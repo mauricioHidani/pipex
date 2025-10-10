@@ -6,13 +6,13 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 07:04:11 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/24 19:47:23 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/10 08:47:42 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_last_execproc(t_cmd *cmd, int **pips, t_shrd *shrd)
+void	ft_last_execproc(t_cmd *cmd, int **pips, t_share *shrd)
 {
 	int	last;
 

@@ -6,13 +6,13 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 07:08:47 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/24 19:47:23 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/10 08:47:42 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	ft_handler_outfile(t_shrd *shared)
+int	ft_handler_outfile(t_share *shared)
 {
 	int		flag;
 	int		outfile_fd;

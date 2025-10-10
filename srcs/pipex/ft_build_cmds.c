@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 13:26:26 by mhidani           #+#    #+#             */
-/*   Updated: 2025/10/08 11:59:27 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/10 10:36:13 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_cmd	*ft_build_cmd(char *in, char **paths);
 static int		ft_begin_idx(t_bool ishdoc);
 
-t_dlist	*ft_build_cmds(t_shrd *shrd)
+t_dlist	*ft_build_cmds(t_share *shrd)
 {
 	int		i;
 	char	**paths;

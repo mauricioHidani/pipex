@@ -6,13 +6,13 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:14:40 by mhidani           #+#    #+#             */
-/*   Updated: 2025/10/08 11:41:55 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/10 08:47:42 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_close_all(int **pipes, t_shrd *shrd)
+void	ft_close_all(int **pipes, t_share *shrd)
 {
 	size_t	i;
 	size_t	size;
