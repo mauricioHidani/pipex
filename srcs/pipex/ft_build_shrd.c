@@ -6,17 +6,17 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:11:51 by mhidani           #+#    #+#             */
-/*   Updated: 2025/10/08 11:31:56 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/10 08:47:42 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-t_shrd	*ft_build_shrd(int argc, char **argv, char **envp, t_bool ishdoc)
+t_share	*ft_build_shrd(int argc, char **argv, char **envp, t_bool ishdoc)
 {
-	t_shrd	*shared;
+	t_share	*shared;
 
-	shared = malloc(sizeof(t_shrd));
+	shared = malloc(sizeof(t_share));
 	if (!shared)
 	{
 		perror("malloc");

@@ -6,13 +6,13 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 19:44:53 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/24 19:45:15 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/10 08:47:42 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_execproc(t_cmd *cmd, int **pips, size_t idx, t_shrd *shrd)
+void	ft_execproc(t_cmd *cmd, int **pips, size_t idx, t_share *shrd)
 {
 	cmd->pid = fork();
 	if (cmd->pid == -1)

@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handler_output.c                                :+:      :+:    :+:   */
+/*   ft_putstrln_fd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/24 07:08:47 by mhidani           #+#    #+#             */
-/*   Updated: 2025/10/10 08:47:42 by mhidani          ###   ########.fr       */
+/*   Created: 2025/10/02 16:58:05 by mhidani           #+#    #+#             */
+/*   Updated: 2025/10/05 23:51:31 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	ft_handler_outfile(t_share *shared)
+void	ft_putstrln_fd(char *str, int fd)
 {
-	int		flag;
-	int		outfile_fd;
-	char	*filename;
+	size_t	i;
 
-	flag = O_TRUNC;
-	if (shared->ishdoc)
-		flag = O_APPEND;
-	filename = shared->argv[shared->argc - 1];
-	outfile_fd = open(filename, O_CREAT | O_WRONLY | flag, 0644);
-	if (outfile_fd < 0)
+	if (!str)
+		return ;
+	i = 0;
+	while (str[i])
 	{
-		perror("open");
-		return (0);
+		write(fd, &str[i], 1);
+		i++;
 	}
-	return (outfile_fd);
+	write(fd, "\n", 1);
 }
