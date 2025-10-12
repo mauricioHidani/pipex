@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 19:22:35 by mhidani           #+#    #+#             */
-/*   Updated: 2025/10/11 14:29:12 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/12 12:31:11 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ static void	ft_close_all_pips_chk(int **pps)
 
 static void	ft_handle_fexit(t_cmd *cmd, t_dlist *lst, t_share *shr, int **pps)
 {
+	int	status;
+
+	status = cmd->status;
 	ft_putstr_fd(cmd->xcmd[0], STDERR_FILENO);
 	if (cmd->status == 127)
 		ft_putstrln_fd(": command not found", STDERR_FILENO);
@@ -66,5 +69,5 @@ static void	ft_handle_fexit(t_cmd *cmd, t_dlist *lst, t_share *shr, int **pps)
 	cmd->pid = -1;
 	ft_close_all_pips_chk(pps);
 	ft_clean_all(shr, pps, lst);
-	exit(cmd->status);
+	exit(status);
 }
