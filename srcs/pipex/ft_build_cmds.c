@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 13:26:26 by mhidani           #+#    #+#             */
-/*   Updated: 2025/10/10 10:36:13 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/12 13:19:44 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 static t_cmd	*ft_build_cmd(char *in, char **paths);
 static int		ft_begin_idx(t_bool ishdoc);
+static t_bool	ft_fill_list(t_share *share, t_dlist *list, char **paths);
 
-t_dlist	*ft_build_cmds(t_share *shrd)
+t_dlist	*ft_build_cmds(t_share *share)
 {
-	int		i;
 	char	**paths;
-	t_cmd	*cmd;
 	t_dlist	*list;
 
 	list = ft_create_dlist(NULL);
@@ -28,24 +27,39 @@ t_dlist	*ft_build_cmds(t_share *shrd)
 		perror("malloc");
 		return (NULL);
 	}
-	paths = ft_extract_paths(shrd->envp);
+	paths = ft_extract_paths(share->envp);
 	if (!paths)
-		return (free(list), NULL);
-	i = ft_begin_idx(shrd->ishdoc);
-	while (i < (shrd->argc - 1))
 	{
-		cmd = ft_build_cmd(shrd->argv[i], paths);
+		free(list);
+		return (NULL);
+	}
+	if (!ft_fill_list(share, list, paths))
+		return (NULL);
+	return (list);
+}
+
+static t_bool	ft_fill_list(t_share *share, t_dlist *list, char **paths)
+{
+	int		i;
+	t_bool	check;
+	t_cmd	*cmd;
+
+	check = TRUE;
+	i = ft_begin_idx(share->ishdoc);
+	while (i < (share->argc - 1))
+	{
+		cmd = ft_build_cmd(share->argv[i], paths);
 		if (!cmd)
 		{
 			ft_clean_dlist(list, ft_clean_cmd);
-			return (NULL);
+			check = FALSE;
 		}
 		ft_push_lst_dlist(list, cmd);
 		cmd = NULL;
 		i++;
 	}
 	ft_clean_tab((void **)paths);
-	return (list);
+	return (check);
 }
 
 static t_cmd	*ft_build_cmd(char *in, char **paths)
