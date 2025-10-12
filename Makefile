@@ -6,7 +6,7 @@
 #    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/08 15:50:49 by mhidani           #+#    #+#              #
-#    Updated: 2025/10/10 16:54:55 by mhidani          ###   ########.fr        #
+#    Updated: 2025/10/12 15:29:12 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,6 @@ CC			= cc
 CFLAGS		= -g -Wall -Wextra -Werror
 AR			= ar
 ARFLAGS		= -rcs
-RM			= rm -f
-RRM			= rm -rf
 MKD			= mkdir -p
 
 # Directories ------------------------------------------------------------------
@@ -62,68 +60,57 @@ DL_SRCS		= $(wildcard $(DL_SRCS_DIR)*.c) # todo: remove
 DL_OBJS		= $(patsubst $(DL_SRCS_DIR)%.c, $(DL_OBJS_DIR)%.o, $(DL_SRCS))
 
 MAIN_SRC		= pipex.c
-MAIN_OBJ	= $(PX_OBJS_DIR)pipex.o
+MAIN_OBJ		= $(PX_OBJS_DIR)pipex.o
 
 BN_MN_SRC		= pipex_bonus.c
-BN_MN_OBJ	= $(PX_OBJS_DIR)pipex_bonus.o
+BN_MN_OBJ		= $(PX_OBJS_DIR)pipex_bonus.o
 
 all: banner $(NAME)
 
 $(NAME): $(LB_SLIB) $(DL_SLIB) $(PX_SLIB) $(MAIN_OBJ)
-	$(CC) $(CFLAGS) -I$(INCS_DIR) $(MAIN_OBJ) $(PX_SLIB) $(DL_SLIB) $(LB_SLIB) -o $@
+	@$(CC) $(CFLAGS) -I$(INCS_DIR) \
+	$(MAIN_OBJ) $(PX_SLIB) $(DL_SLIB) $(LB_SLIB) -o $@
+	@echo "🦎 $(C09)Compiled Pipex$(RESET)"
 
 # Libft ========================================================================
 $(LB_SLIB): $(LB_OBJS) | $(LIBS_DIR)
-	@echo ""
-	@echo "Libft"
-	$(AR) $(ARFLAGS) $@ $^
+	@$(AR) $(ARFLAGS) $@ $^
+	@echo "📥 $(C06)Generate Static Lib Libft$(RESET)"
 
 $(LB_OBJS_DIR)%.o: $(LB_SRCS_DIR)%.c | $(LB_OBJS_DIR)
-	@echo -n "libft "
-	$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
 
 # Doubly-List ==================================================================
 $(DL_SLIB): $(DL_OBJS) | $(LIBS_DIR)
-	@echo ""
-	@echo "Doubly-List"
-	$(AR) $(ARFLAGS) $@ $^
+	@$(AR) $(ARFLAGS) $@ $^
+	@echo "📥 $(C07)Generate Static Lib Doubly-List"
 
 $(DL_OBJS_DIR)%.o: $(DL_SRCS_DIR)%.c | $(DL_OBJS_DIR)
-	@echo -n "dlist "
-	$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
 
 # Pipex ========================================================================
 $(PX_SLIB): $(PX_OBJS) | $(LIBS_DIR)
-	@echo ""
-	@echo "Pipex"
-	$(AR) $(ARFLAGS) $@ $^
+	@$(AR) $(ARFLAGS) $@ $^
+	@echo "📥 $(C08)Generate Static Lib Pipex$(RESET)"
 
 $(PX_OBJS_DIR)%.o: $(PX_SRCS_DIR)%.c | $(PX_OBJS_DIR)
-	@echo -n "pipex "
-	$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
 
 # Main Functions ===============================================================
 $(MAIN_OBJ): $(MAIN_SRC)
-	@echo ""
-	@echo -n "Pipex main function"
-	$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
-
-$(BN_MN_OBJ): $(BN_MN_SRC)
-	@echo ""
-	@echo -n "Pipex Bonus main function"
-	$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
 
 $(LIBS_DIR):
-	$(MKD) $@
+	@mkdir -p $@
 
 $(PX_OBJS_DIR):
-	$(MKD) $@
+	@mkdir -p $@
 
 $(DL_OBJS_DIR):
-	$(MKD) $@
+	@mkdir -p $@
 
 $(LB_OBJS_DIR):
-	$(MKD) $@
+	@mkdir -p $@
 
 banner:
 	@echo "$(C01) ______   __     ______   ______     __  __ $(RESET)"
@@ -135,17 +122,13 @@ banner:
 	@echo "$(C06)$(LOCAL) - 42 São Paulo$(RESET)"
 
 clean: 
-	@echo ""
-	@echo "Clean"
-	$(RRM) $(LB_OBJS_DIR)
-	$(RRM) $(DL_OBJS_DIR)
-	$(RRM) $(PX_OBJS_DIR)
-	$(RM) $(LB_SLIB)
-	$(RM) $(DL_SLIB)
-	$(RM) $(PX_SLIB)
+	@echo "🧹 $(C05)Clean$(RESET)"
+	@rm -rf $(OBJS_DIR)
+	@rm -rf $(LIBS_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	@echo "🧹 $(C05)Full Clean$(RESET)"
+	@rm -f $(NAME)
 
 re: fclean all
 
