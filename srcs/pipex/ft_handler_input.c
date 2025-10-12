@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 16:54:56 by mhidani           #+#    #+#             */
-/*   Updated: 2025/10/10 08:38:11 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/12 12:33:16 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_handler_heredoc(char *eof, int *fd)
 	line = ft_get_next_line(STDIN_FILENO);
 	while (line != NULL)
 	{
-		if (ft_strncmp(line, eof, ft_strlen(line) - 1) == 0)
+		if (ft_strncmp(line, eof, ft_strlen(eof) - 1) == 0)
 		{
 			free(line);
 			line = NULL;
